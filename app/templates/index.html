@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}midnightcron &middot; projects{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <pre class="hero-banner">$ whoami</pre>
+  <p>
+    Robin Worreby. Zürich. I build small data tools and host them on a Raspberry Pi
+    under <code>midnightcron.com</code>.
+  </p>
+</section>
+
+<section class="projects-grid">
+  <h2>projects</h2>
+  <div class="cards">
+    {% for project in projects %}
+      {% include "partials/project_card.html" %}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

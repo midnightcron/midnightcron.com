@@ -1,0 +1,217 @@
+/* Custom overlay on top of Pico (dark theme).
+ * Aesthetic: monospace, terminal-adjacent, low color, high contrast.
+ * Strategy: re-skin Pico's CSS variables, add a small set of project-specific
+ * classes for the projects grid and status chips. No layout framework.
+ */
+
+:root {
+  --pico-font-family: ui-monospace, "JetBrains Mono", "IBM Plex Mono",
+                      "SF Mono", Menlo, Consolas, monospace;
+  --pico-font-size: 96%;
+  --pico-line-height: 1.55;
+}
+
+[data-theme="dark"] {
+  --pico-background-color: #0e0f12;
+  --pico-color: #c9d1d9;
+  --pico-h1-color: #ffffff;
+  --pico-h2-color: #f0f6fc;
+  --pico-h3-color: #e6edf3;
+  --pico-primary: #7ee787;
+  --pico-primary-hover: #56d364;
+  --pico-primary-focus: rgba(126, 231, 135, 0.25);
+  --pico-card-background-color: #14161b;
+  --pico-card-border-color: #21262d;
+  --pico-muted-color: #6e7681;
+  --pico-code-background-color: #1a1d23;
+  --pico-code-color: #f0b72f;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+code {
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+/* ---------- header / footer ---------- */
+
+.site-header {
+  border-bottom: 1px solid var(--pico-card-border-color);
+  margin-bottom: 2rem;
+}
+
+.site-header strong a {
+  text-decoration: none;
+  color: var(--pico-h1-color);
+}
+
+.site-footer {
+  border-top: 1px solid var(--pico-card-border-color);
+  padding-top: 1rem;
+  margin-top: 3rem;
+  color: var(--pico-muted-color);
+  text-align: center;
+}
+
+.prompt-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--pico-primary);
+  animation: blink 1.05s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to { visibility: hidden; }
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  margin-bottom: 3rem;
+}
+
+.hero-banner {
+  background: transparent;
+  color: var(--pico-primary);
+  padding: 0;
+  border: none;
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ---------- projects grid ---------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 1rem;
+}
+
+.project-card {
+  background: var(--pico-card-background-color);
+  border: 1px solid var(--pico-card-border-color);
+  padding: 1.25rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.project-card header {
+  padding: 0;
+  border: none;
+  background: transparent;
+  margin: 0;
+}
+
+.project-card h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.25rem 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.project-card h3 a {
+  text-decoration: none;
+}
+
+.project-card .tagline {
+  color: var(--pico-muted-color);
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.project-card .project-links {
+  display: flex;
+  gap: 0.9rem;
+  font-size: 0.85rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+  margin-top: auto;
+}
+
+/* ---------- stack chips ---------- */
+
+.stack-chips {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* Pico sets list-style-type on the li itself, not the ul, so the reset
+ * has to land here too. ::marker keeps it killed even if a later style
+ * tries to bring it back. */
+.stack-chips li {
+  list-style: none;
+  display: inline-block;
+  font-size: 0.75rem;
+  background: rgba(126, 231, 135, 0.07);
+  border: 1px solid rgba(126, 231, 135, 0.2);
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  color: var(--pico-primary);
+  margin: 0;
+}
+
+.stack-chips li::marker {
+  content: "";
+}
+
+/* ---------- status chip ---------- */
+
+.status {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 3px;
+  text-transform: lowercase;
+  vertical-align: middle;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.status-live      { color: #7ee787; border-color: rgba(126, 231, 135, 0.45); }
+.status-migrating { color: #f0b72f; border-color: rgba(240, 183, 47, 0.45); }
+.status-wip       { color: #58a6ff; border-color: rgba(88, 166, 255, 0.45); }
+.status-archived  { color: #6e7681; border-color: rgba(110, 118, 129, 0.45); }
+
+/* ---------- project detail ---------- */
+
+.project-detail h1 .status {
+  font-size: 0.55em;
+  margin-left: 0.5rem;
+}
+
+.project-detail section {
+  margin: 1.75rem 0;
+}
+
+.project-detail .links a {
+  word-break: break-all;
+}
+
+/* ---------- about ---------- */
+
+.about p {
+  max-width: 60ch;
+}

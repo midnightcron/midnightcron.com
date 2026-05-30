@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}midnightcron &middot; about{% endblock %}
+
+{% block content %}
+<section class="about">
+  <h1>about</h1>
+
+  <p>
+    Robin Worreby. Based in Zürich. <em>(One line about day job goes here, replace before launch.)</em>
+    Off-hours I build small data tools and host them on a Raspberry Pi 4 sitting on my desk.
+  </p>
+
+  <p>
+    The default stack for everything here is Python: FastAPI plus Jinja, HTMX for the
+    interactive bits, Pico.css for styling, SQLite or TimescaleDB depending on the data
+    shape. Each service runs in Docker Compose behind Caddy and a Cloudflare Tunnel.
+    Boring, fast, nothing exotic, runs on a 35-watt computer.
+  </p>
+
+  <p>
+    Project code lives at
+    <a href="https://github.com/midnightcron" rel="me noopener">github.com/midnightcron</a>.
+    Personal account:
+    <a href="https://github.com/rworreby" rel="me noopener">github.com/rworreby</a>.
+    Reach me at <a href="mailto:robin@worreby.ch">robin@worreby.ch</a>.
+  </p>
+</section>
+{% endblock %}

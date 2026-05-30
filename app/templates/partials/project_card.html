@@ -1,0 +1,19 @@
+<article class="project-card">
+  <header>
+    <h3>
+      <a href="/projects/{{ project.slug }}">{{ project.name }}</a>
+      <span class="status status-{{ project.status }}">{{ project.status }}</span>
+    </h3>
+    <p class="tagline">{{ project.tagline }}</p>
+  </header>
+  <ul class="stack-chips">
+    {% for tech in project.stack %}
+      <li>{{ tech }}</li>
+    {% endfor %}
+  </ul>
+  <footer class="project-links">
+    {% if project.live_url %}<a href="{{ project.live_url }}" rel="noopener">live</a>{% endif %}
+    {% if project.repo_url %}<a href="{{ project.repo_url }}" rel="noopener">repo</a>{% endif %}
+    <a href="/projects/{{ project.slug }}">writeup</a>
+  </footer>
+</article>

@@ -1,0 +1,20 @@
+# Cloudflare Tunnel terminates TLS at the edge, so Caddy serves plain HTTP
+# internally. auto_https off disables Caddy's own ACME flow.
+{
+    auto_https off
+}
+
+# Apex domain: the personal site itself.
+http://midnightcron.com {
+    reverse_proxy app:8000
+}
+
+# Redirect the www variant to the apex.
+http://www.midnightcron.com {
+    redir https://midnightcron.com{uri} permanent
+}
+
+# Fallback for direct LAN / container-name access.
+:80 {
+    reverse_proxy app:8000
+}

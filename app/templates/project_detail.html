@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}midnightcron &middot; {{ project.name }}{% endblock %}
+{% block description %}{{ project.tagline }}{% endblock %}
+
+{% block content %}
+<article class="project-detail">
+  <header>
+    <p><a href="/">&larr; back</a></p>
+    <h1>{{ project.name }} <span class="status status-{{ project.status }}">{{ project.status }}</span></h1>
+    <p class="tagline">{{ project.tagline }}</p>
+  </header>
+
+  <section>
+    <h2>what it is</h2>
+    <p>{{ project.description }}</p>
+  </section>
+
+  <section>
+    <h2>stack</h2>
+    <ul class="stack-chips">
+      {% for tech in project.stack %}
+        <li>{{ tech }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <h2>notes</h2>
+    <p>{{ project.story }}</p>
+  </section>
+
+  <section class="links">
+    {% if project.live_url %}
+      <p>live: <a href="{{ project.live_url }}" rel="noopener">{{ project.live_url }}</a></p>
+    {% endif %}
+    {% if project.repo_url %}
+      <p>repo: <a href="{{ project.repo_url }}" rel="noopener">{{ project.repo_url }}</a></p>
+    {% endif %}
+  </section>
+</article>
+{% endblock %}

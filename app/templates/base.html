@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}midnightcron{% endblock %}</title>
+  <meta name="description" content="{% block description %}Personal hub for Robin Worreby's data and tooling projects.{% endblock %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/site.css') }}?v={{ static_version }}">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container">
+      <ul>
+        <li><strong><a href="/">midnightcron</a></strong><span class="prompt-cursor">_</span></li>
+      </ul>
+      <ul>
+        <li><a href="/">projects</a></li>
+        <li><a href="/about">about</a></li>
+        <li><a href="https://github.com/midnightcron" rel="me noopener">github</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="container site-footer">
+    <small>
+      <a href="mailto:robin@worreby.ch">robin@worreby.ch</a>
+      &middot;
+      <a href="https://github.com/midnightcron" rel="me noopener">github.com/midnightcron</a>
+      &middot;
+      <a href="https://www.linkedin.com/in/REPLACE-ME/" rel="me noopener">linkedin</a>
+    </small>
+  </footer>
+</body>
+</html>
