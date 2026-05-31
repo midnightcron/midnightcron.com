@@ -254,18 +254,44 @@ code {
 
 /* ---------- about ---------- */
 
-.about p {
+/* Two-column layout: prose on the left, brand mark on the right. The
+   logo fills the open right-side space that the 60ch-capped text leaves
+   behind. Stacks vertically on viewports too narrow to fit both. */
+.about {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
+}
+
+.about-text {
+  flex: 1 1 auto;
+  min-width: 0;
   max-width: 60ch;
 }
 
-/* Large brand mark on /about. Sits between the heading and the prose,
-   centered, sized so the chest 0 0 * * * text is legible. The 12px
-   radius softens the SVG's hard sky-blue rectangle. */
+.about-text p {
+  max-width: 60ch;
+}
+
+/* Large brand mark on /about. Sized so the chest 0 0 * * * text is legible.
+   The 12px radius softens the SVG's hard sky-blue rectangle. */
 .about-logo {
-  display: block;
-  width: 100%;
-  max-width: 280px;
-  height: auto;
-  margin: 1.5rem auto 2.5rem;
+  flex-shrink: 0;
+  width: 280px;
+  height: 280px;
   border-radius: 12px;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 720px) {
+  .about {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .about-logo {
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+  }
 }

@@ -3,7 +3,31 @@
 
 {% block content %}
 <section class="about">
-  <h1>about</h1>
+  <div class="about-text">
+    <h1>about</h1>
+
+    <p>
+      Robin Worreby. Based in Zürich. Data scientist by background, currently
+      AI Implementation Expert at aiaibot, building automation and process
+      improvement with generative AI (RAG, agents, bots). Off-hours I build
+      small data tools and host them on a Raspberry Pi 4 sitting on my desk.
+    </p>
+
+    <p>
+      The default stack for everything here is Python: FastAPI plus Jinja, HTMX for the
+      interactive bits, Pico.css for styling, SQLite or TimescaleDB depending on the data
+      shape. Each service runs in Docker Compose behind Caddy and a Cloudflare Tunnel.
+      Boring, fast, nothing exotic, runs on a 35-watt computer.
+    </p>
+
+    <p>
+      Project code lives at
+      <a href="https://github.com/midnightcron" rel="me noopener">github.com/midnightcron</a>.
+      Personal account:
+      <a href="https://github.com/rworreby" rel="me noopener">github.com/rworreby</a>.
+      Reach me at <a href="mailto:robin@worreby.ch">robin@worreby.ch</a>.
+    </p>
+  </div>
 
   <img
     class="about-logo"
@@ -11,27 +35,5 @@
     alt="midnightcron logo: small robot under a moonlit sky displaying the cron expression 0 0 * * * on its chest"
     width="280"
     height="280">
-
-  <p>
-    Robin Worreby. Based in Zürich. Data scientist by background, currently
-    AI Implementation Expert at aiaibot, building automation and process
-    improvement with generative AI (RAG, agents, bots). Off-hours I build
-    small data tools and host them on a Raspberry Pi 4 sitting on my desk.
-  </p>
-
-  <p>
-    The default stack for everything here is Python: FastAPI plus Jinja, HTMX for the
-    interactive bits, Pico.css for styling, SQLite or TimescaleDB depending on the data
-    shape. Each service runs in Docker Compose behind Caddy and a Cloudflare Tunnel.
-    Boring, fast, nothing exotic, runs on a 35-watt computer.
-  </p>
-
-  <p>
-    Project code lives at
-    <a href="https://github.com/midnightcron" rel="me noopener">github.com/midnightcron</a>.
-    Personal account:
-    <a href="https://github.com/rworreby" rel="me noopener">github.com/rworreby</a>.
-    Reach me at <a href="mailto:robin@worreby.ch">robin@worreby.ch</a>.
-  </p>
 </section>
 {% endblock %}
