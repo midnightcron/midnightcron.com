@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}midnightcron{% endblock %} &middot; 0 0 * * *</title>
   <meta name="description" content="{% block description %}Personal hub for Robin Worreby's data and tooling projects.{% endblock %}">
-  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', path='svg/logo.svg') }}">
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', path='svg/midnightcron.svg') }}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
   <link rel="stylesheet" href="{{ url_for('static', path='css/site.css') }}?v={{ static_version }}">
 </head>
@@ -14,25 +14,15 @@
     <nav class="container">
       <ul>
         <li>
-          <strong>
-            <a href="/" class="brand">
-              {# Inline SVG keeps the logo on currentColor so it tracks the
-                 brand text color (white in dark mode) without an extra HTTP
-                 request. Same shape lives in static/svg/logo.svg, used as
-                 the favicon. #}
-              <svg class="brand-logo" viewBox="0 0 24 24" width="20" height="20"
-                   fill="none" stroke="currentColor"
-                   stroke-linecap="round" stroke-linejoin="round"
-                   stroke-width="1.75" aria-hidden="true">
-                <circle cx="12" cy="12" r="9"/>
-                <line x1="12" y1="12" x2="12" y2="4.5"/>
-                <line x1="12" y1="12" x2="12" y2="7.5" stroke-width="2.75"/>
-                <circle cx="12" cy="3.75" r="0.5" fill="currentColor"/>
-              </svg>
-              midnightcron
-            </a>
-          </strong>
-          <span class="prompt-cursor">_</span>
+          <a href="/" class="brand">
+            <img class="brand-logo"
+                 src="{{ url_for('static', path='svg/midnightcron.svg') }}"
+                 alt=""
+                 aria-hidden="true"
+                 width="36" height="36">
+            <strong class="brand-wordmark">midnightcron</strong><span class="prompt-cursor">_</span>
+            <code class="brand-cron" aria-label="midnight every day">0 0 * * *</code>
+          </a>
         </li>
       </ul>
       <ul>

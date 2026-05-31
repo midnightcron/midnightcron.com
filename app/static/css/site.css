@@ -59,21 +59,46 @@ code {
   color: var(--pico-h1-color);
 }
 
-/* Brand mark: inline SVG clock + wordmark, vertically centered.
-   The SVG inherits currentColor from the link, so it shifts with the
-   theme automatically. */
+/* Brand mark: project logo + wordmark + visible cron tagline, all on one
+   row, vertically centered. The logo is the full-art midnightcron robot
+   under a moonlit sky (static/svg/midnightcron.svg); browsers downscale
+   it to header size and use the same file as the favicon. */
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.55rem;
+  text-decoration: none;
 }
 
 .brand-logo {
   display: block;
   flex-shrink: 0;
-  /* Nudge optical alignment: monospace glyphs sit a hair higher than the
-     circle's vertical midpoint, so push the icon down by a fraction. */
-  margin-top: 1px;
+  border-radius: 4px;  /* softens the SVG's hard sky-blue rectangle edges */
+}
+
+.brand-wordmark {
+  color: var(--pico-h1-color);
+}
+
+/* Visible cron-expression chip next to the wordmark. Keeps the brand
+   identity ("midnightcron = the 0 0 * * * cron job") readable on the
+   page itself, not only in the browser tab title. */
+.brand-cron {
+  display: inline-block;
+  margin-left: 0.55rem;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.78rem;
+  background: var(--pico-code-background-color);
+  color: var(--pico-primary);
+  border: 1px solid rgba(126, 231, 135, 0.25);
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+}
+
+/* On narrow screens, drop the cron chip rather than wrapping the brand
+   onto two lines and squashing the nav. */
+@media (max-width: 540px) {
+  .brand-cron { display: none; }
 }
 
 .site-footer {
