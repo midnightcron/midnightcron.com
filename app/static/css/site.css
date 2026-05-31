@@ -59,6 +59,23 @@ code {
   color: var(--pico-h1-color);
 }
 
+/* Brand mark: inline SVG clock + wordmark, vertically centered.
+   The SVG inherits currentColor from the link, so it shifts with the
+   theme automatically. */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.brand-logo {
+  display: block;
+  flex-shrink: 0;
+  /* Nudge optical alignment: monospace glyphs sit a hair higher than the
+     circle's vertical midpoint, so push the icon down by a fraction. */
+  margin-top: 1px;
+}
+
 .site-footer {
   border-top: 1px solid var(--pico-card-border-color);
   padding-top: 1rem;
