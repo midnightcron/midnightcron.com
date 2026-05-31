@@ -257,3 +257,15 @@ code {
 .about p {
   max-width: 60ch;
 }
+
+/* Large brand mark on /about. Sits between the heading and the prose,
+   centered, sized so the chest 0 0 * * * text is legible. The 12px
+   radius softens the SVG's hard sky-blue rectangle. */
+.about-logo {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  margin: 1.5rem auto 2.5rem;
+  border-radius: 12px;
+}
