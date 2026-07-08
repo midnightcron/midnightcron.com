@@ -36,11 +36,11 @@ PROJECTS: list[Project] = [
         "live_url": "https://alpenpasse.midnightcron.com",
         "repo_url": "https://github.com/midnightcron/alps-passes",
         "story": (
-            "Cloned from a sibling app that already had auth, sessions, rate limiting, "
-            "and a Docker + Caddy + Cloudflare Tunnel deploy pattern wired up, so the "
-            "platform work was mostly plumbing. Currently at Phase 0: sign-in and the "
-            "deploy story are done. The pass catalogue, people profiles, ride logging, "
-            "and the trip logbook land in the next phases."
+            "Cloned from a sibling app that came with auth, sessions, rate limiting, "
+            "and the Docker + Caddy + Cloudflare Tunnel deploy pattern already wired "
+            "up, so the platform work was mostly plumbing. All features landed after "
+            "that: pass catalogue, people profiles, ride logging, and the trip "
+            "logbook. In production and invite-only for now."
         ),
     },
     {
