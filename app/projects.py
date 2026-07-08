@@ -21,6 +21,29 @@ class Project(TypedDict):
 
 PROJECTS: list[Project] = [
     {
+        "slug": "alpenpasse",
+        "name": "Alpenpässe",
+        "tagline": "Cycling logbook for alpine passes, per person and per trip.",
+        "description": (
+            "Pick a pass from the catalogue (country, canton, climb category, summit "
+            "elevation, ascent, length, gradient), record who rode it and when, and "
+            "watch each rider's collection grow: distinct passes, total ascent metres, "
+            "total kilometres, canton and country completion. A trip logbook ties rides "
+            "together with dates, participants, notes, and a group photo."
+        ),
+        "stack": ["FastAPI", "SQLModel", "HTMX", "Pico.css", "Alembic"],
+        "status": "live",
+        "live_url": "https://alpenpasse.midnightcron.com",
+        "repo_url": "https://github.com/midnightcron/alps-passes",
+        "story": (
+            "Cloned from a sibling app that already had auth, sessions, rate limiting, "
+            "and a Docker + Caddy + Cloudflare Tunnel deploy pattern wired up, so the "
+            "platform work was mostly plumbing. Currently at Phase 0: sign-in and the "
+            "deploy story are done. The pass catalogue, people profiles, ride logging, "
+            "and the trip logbook land in the next phases."
+        ),
+    },
+    {
         "slug": "badi-monitor",
         "name": "Badi Monitor",
         "tagline": "Real-time occupancy for two Zürich indoor pools, with quietest-time predictions.",
@@ -100,29 +123,6 @@ PROJECTS: list[Project] = [
             "Live but mid-rework. Current report shape and prompt scaffold are not "
             "where they need to be. Planned: clearer load metrics, tighter prompts, "
             "and a leaner scheduler than Airflow once the DAG count stays at one."
-        ),
-    },
-    {
-        "slug": "alpenpasse",
-        "name": "Alpenpässe",
-        "tagline": "Cycling logbook for alpine passes, per person and per trip.",
-        "description": (
-            "Pick a pass from the catalogue (country, canton, climb category, summit "
-            "elevation, ascent, length, gradient), record who rode it and when, and "
-            "watch each rider's collection grow: distinct passes, total ascent metres, "
-            "total kilometres, canton and country completion. A trip logbook ties rides "
-            "together with dates, participants, notes, and a group photo."
-        ),
-        "stack": ["FastAPI", "SQLModel", "HTMX", "Pico.css", "Alembic"],
-        "status": "live",
-        "live_url": "https://alpenpasse.midnightcron.com",
-        "repo_url": "https://github.com/midnightcron/alps-passes",
-        "story": (
-            "Cloned from a sibling app that already had auth, sessions, rate limiting, "
-            "and a Docker + Caddy + Cloudflare Tunnel deploy pattern wired up, so the "
-            "platform work was mostly plumbing. Currently at Phase 0: sign-in and the "
-            "deploy story are done. The pass catalogue, people profiles, ride logging, "
-            "and the trip logbook land in the next phases."
         ),
     },
 ]
