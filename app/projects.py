@@ -94,14 +94,13 @@ PROJECTS: list[Project] = [
     {
         "slug": "training-coach",
         "name": "Training Coach",
-        "tagline": "Garmin-fed training and nutrition coach, living in Telegram.",
+        "tagline": "Garmin-fed training coach with weekly reports and a Telegram chat.",
         "description": (
             "A weekly Airflow pipeline pulls Garmin activities and wellness data (HRV, "
             "sleep, body battery), analyses FIT files of quality sessions, and has "
             "Claude write a coaching report every Monday, published to Notion and "
             "Telegram. Between reports, a tool-using coach bot answers questions from "
-            "the same data, a morning brief follows each weigh-in, and a nutrition bot "
-            "logs meals from photos."
+            "the same data, and a morning brief follows each weigh-in."
         ),
         "stack": ["Python", "Airflow", "SQLite", "Claude", "Telegram", "Notion"],
         "status": "live",
@@ -111,10 +110,34 @@ PROJECTS: list[Project] = [
             "Started as a single weekly report with a fixed prompt. Grew into a "
             "holistic coach: the chat bot calls read-only tools (activities, weekly "
             "totals, FIT analysis in my own zones, wellness, training status) as often "
-            "as it needs before answering, and keeps context across turns. The "
-            "nutrition side came next: an iPhone shortcut uploads food photos, the bot "
-            "estimates macros and saves them with edit and undo. Private repo, since "
-            "it is wired to my own accounts."
+            "as it needs before answering, and keeps context across turns. It also "
+            "reads what Tania (the nutrition coach) logged, so fueling advice is based "
+            "on what I actually ate. Private repo, since it is wired to my own accounts."
+        ),
+    },
+    {
+        "slug": "tania",
+        "name": "Tania",
+        "tagline": "Nutrition coach on Telegram: send a meal photo, get it logged.",
+        "description": (
+            "Send Tania a text (\"2 slices bread with quark, banana\") or a photo of a "
+            "meal or nutrition label. Claude splits it into items with quantity, meal, "
+            "and nutrients, and after you confirm, each item becomes a row in a Notion "
+            "food log. Each save comes back with the day's running totals against "
+            "targets for the day type (rest, training, or double), worked out from "
+            "Garmin and the weekly plan."
+        ),
+        "stack": ["Python", "Claude", "Telegram", "Notion", "SQLite"],
+        "status": "live",
+        "live_url": None,
+        "repo_url": None,
+        "story": (
+            "Lives next to Training Coach as its own bot and container. A food memory "
+            "keeps repeat items consistent and offers one-tap favourites, so only new "
+            "food costs a model call. An iPhone shortcut uploads photos straight to her "
+            "through a Cloudflare Tunnel, and she saves them with Edit and Undo "
+            "buttons. A small benchmark scores a cheap model against a stronger one, "
+            "using logged nutrition labels as ground truth."
         ),
     },
     {
