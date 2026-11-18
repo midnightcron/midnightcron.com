@@ -27,9 +27,10 @@ PROJECTS: list[Project] = [
         "description": (
             "Pick a pass from the catalogue (country, canton, climb category, summit "
             "elevation, ascent, length, gradient), record who rode it and when, and "
-            "watch each rider's collection grow: distinct passes, total ascent metres, "
-            "total kilometres, canton and country completion. A trip logbook ties rides "
-            "together with dates, participants, notes, and a group photo."
+            "watch each rider's collection grow: distinct passes, ascent metres per side "
+            "climbed, canton and country completion, and achievement badges. GPX and FIT "
+            "tracks import straight into a ride, and a trip logbook ties rides together "
+            "with dates, participants, notes, photos, and a read-only public share link."
         ),
         "stack": ["FastAPI", "SQLModel", "HTMX", "Pico.css", "Alembic"],
         "status": "live",
@@ -38,9 +39,12 @@ PROJECTS: list[Project] = [
         "story": (
             "Cloned from a sibling app that came with auth, sessions, rate limiting, "
             "and the Docker + Caddy + Cloudflare Tunnel deploy pattern already wired "
-            "up, so the platform work was mostly plumbing. All features landed after "
-            "that: pass catalogue, people profiles, ride logging, and the trip "
-            "logbook. In production and invite-only for now."
+            "up, so the platform work was mostly plumbing. Everything after that is "
+            "features: pass catalogue, ride logging, trip logbook, badges, CSV export. "
+            "The fiddliest part was track import: working out which side of a pass "
+            "was climbed (Grimsel from Oberwald or from Gletsch?) from the elevation "
+            "profile, and counting each side's ascent only once. In production and "
+            "invite-only; friend invites and a shareable passport are next on the list."
         ),
     },
     {
@@ -70,8 +74,9 @@ PROJECTS: list[Project] = [
         "name": "Kicker",
         "tagline": "Office foosball 2v2 ELO tracker.",
         "description": (
-            "Match entry, leaderboards, rating history, and season resets for a 2v2 "
-            "foosball ladder. Built for low-friction logging during coffee breaks."
+            "Match entry, leaderboard, and a rolling 30-day rating chart for a 2v2 "
+            "foosball ladder. Built for low-friction logging during coffee breaks: "
+            "pick both teams from two tap grids and submit."
         ),
         "stack": ["FastAPI", "SQLite", "HTMX", "Pico.css", "Alembic"],
         "status": "live",
@@ -82,7 +87,75 @@ PROJECTS: list[Project] = [
             "average rating but is distributed to each player individually. HTMX-only "
             "frontend, no build step. The trickiest bit ended up being not the math "
             "but a Cloudflare edge-cache fix for stale CSS after deploys (now solved "
-            "with an mtime-derived ?v= query string on the stylesheet link)."
+            "with an mtime-derived ?v= query string on the stylesheet link). Since "
+            "hardened with CSRF tokens, rate limiting, and stricter session cookies."
+        ),
+    },
+    {
+        "slug": "training-coach",
+        "name": "Training Coach",
+        "tagline": "Garmin-fed training and nutrition coach, living in Telegram.",
+        "description": (
+            "A weekly Airflow pipeline pulls Garmin activities and wellness data (HRV, "
+            "sleep, body battery), analyses FIT files of quality sessions, and has "
+            "Claude write a coaching report every Monday, published to Notion and "
+            "Telegram. Between reports, a tool-using coach bot answers questions from "
+            "the same data, a morning brief follows each weigh-in, and a nutrition bot "
+            "logs meals from photos."
+        ),
+        "stack": ["Python", "Airflow", "SQLite", "Claude", "Telegram", "Notion"],
+        "status": "live",
+        "live_url": None,
+        "repo_url": None,
+        "story": (
+            "Started as a single weekly report with a fixed prompt. Grew into a "
+            "holistic coach: the chat bot calls read-only tools (activities, weekly "
+            "totals, FIT analysis in my own zones, wellness, training status) as often "
+            "as it needs before answering, and keeps context across turns. The "
+            "nutrition side came next: an iPhone shortcut uploads food photos, the bot "
+            "estimates macros and saves them with edit and undo. Private repo, since "
+            "it is wired to my own accounts."
+        ),
+    },
+    {
+        "slug": "coffee",
+        "name": "Coffee",
+        "tagline": "Espresso grind log: time versus output weight, per bean.",
+        "description": (
+            "Log a shot (bean, grind setting, grind time, output weight) and see a "
+            "scatter plot per bean with a linear fit, so dialling in a new bag is a "
+            "glance at a chart instead of a notebook page of scribbles."
+        ),
+        "stack": ["FastAPI", "SQLModel", "HTMX", "Chart.js", "Pico.css"],
+        "status": "live",
+        "live_url": "https://coffee.midnightcron.com",
+        "repo_url": "https://github.com/midnightcron/coffee",
+        "story": (
+            "Designed on paper first (an architecture doc reviewed before any code), "
+            "then scaffolded on the kicker stack in a day. Pushes to main auto-deploy "
+            "to the Pi over Tailscale SSH."
+        ),
+    },
+    {
+        "slug": "whine-or-wine",
+        "name": "Whine or Wine",
+        "tagline": "Group bike-trip tracker: every deed is a wine or a whine.",
+        "description": (
+            "Built for a cycling trip in France. Pick a rider and a deed they were "
+            "caught doing; each deed counts as a wine (worth celebrating) or a whine "
+            "(worth groaning about), and the leaderboard tallies them up. Ends with a "
+            "trip-highlights page and a printable quote-wall poster."
+        ),
+        "stack": ["FastAPI", "SQLModel", "HTMX", "Chart.js", "Pico.css"],
+        "status": "live",
+        "live_url": "https://winenotwhine.midnightcron.com",
+        "repo_url": "https://github.com/peterbraden/whine-or-wine",
+        "story": (
+            "A group effort with friends from the trip, several humans and several "
+            "Claude Code instances committing in parallel, coordinated through a "
+            "shared standup file in the repo. Its auth, sessions, and deploy setup "
+            "later became the base for Alpenpässe. The trip is over; the site stays "
+            "up as a souvenir."
         ),
     },
     {
@@ -95,34 +168,15 @@ PROJECTS: list[Project] = [
             "so you can pick a less painful crossing time."
         ),
         "stack": ["Python", "FastAPI", "SQLite", "Chart.js"],
-        "status": "migrating",
-        "live_url": None,
-        "repo_url": "https://github.com/midnightcron/autoverlad",
-        "story": (
-            "Started as a laptop daemon scraping a single RSS feed (Matterhorn "
-            "Gotthard Bahn for the Furka), with a matplotlib dashboard. Migration "
-            "in flight to the Pi with proper scheduling, multi-station coverage "
-            "(Furka, Simplon, Lötschberg), and a FastAPI dashboard at "
-            "autoverlad.midnightcron.com."
-        ),
-    },
-    {
-        "slug": "training-coach",
-        "name": "Training Coach",
-        "tagline": "Weekly training-load report with LLM-written coaching notes.",
-        "description": (
-            "Pulls workout history, computes load and recovery, then asks an LLM to "
-            "draft the week's coaching summary against a prompt template. Runs as a "
-            "scheduled job on the Pi."
-        ),
-        "stack": ["Airflow", "Postgres", "SQLite", "Python", "LLM"],
         "status": "wip",
         "live_url": None,
         "repo_url": None,
         "story": (
-            "Live but mid-rework. Current report shape and prompt scaffold are not "
-            "where they need to be. Planned: clearer load metrics, tighter prompts, "
-            "and a leaner scheduler than Airflow once the DAG count stays at one."
+            "Started as a laptop daemon scraping a single RSS feed (Matterhorn "
+            "Gotthard Bahn for the Furka), with a matplotlib dashboard. The move to "
+            "the Pi (proper scheduling, Furka, Simplon, and Lötschberg coverage, a "
+            "FastAPI dashboard) is planned but parked while other projects took "
+            "priority."
         ),
     },
 ]
